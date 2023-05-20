@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Login } from "./Login";
-import { LogoutLink } from "./LogoutLink";
 import { ProjectsIndex } from "./ProjectsIndex";
 import { Signup } from "./Signup";
 
@@ -21,7 +19,6 @@ export function Content() {
     <div>
       <h1>Welcome to the Writers Tool!</h1>
       <Signup />
-      <LogoutLink />
       <ProjectsIndex projects={projects} />
     </div>
   );
