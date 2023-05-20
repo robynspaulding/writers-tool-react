@@ -21,7 +21,6 @@ export function Content() {
     <div>
       <h1>Welcome to the Writers Tool!</h1>
       <Signup />
-      <Login />
       <LogoutLink />
       <ProjectsIndex projects={projects} />
     </div>
