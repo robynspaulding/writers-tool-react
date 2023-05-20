@@ -4,9 +4,12 @@ import { useState } from "react";
 import { ProjectsIndex } from "./ProjectsIndex";
 import { ProjectsNew } from "./ProjectsNew";
 import { Modal } from "./Modal";
+import { ProjectsShow } from "./ProjectsShow";
 
 export function Content() {
   const [projects, setProjects] = useState([]);
+  const [isProjectShowVisible, setIsProjectShowVisible] = useState(false);
+  const [currentProject, setCurrentProject] = useState({});
 
   const handleIndexProjects = () => {
     axios.get("http://localhost:3000/projects.json").then((response) => {
@@ -21,14 +24,26 @@ export function Content() {
       setProjects([...projects, response.data]);
     });
   };
+
+  const handleShowProject = (project) => {
+    console.log("handleShowProject", project);
+    setIsProjectShowVisible(true);
+    setCurrentProject(project);
+  };
+
+  const handleClose = () => {
+    console.log("handleClose");
+    setIsProjectShowVisible(false);
+  };
+
   useEffect(handleIndexProjects, []);
   return (
     <div>
       <h1>Welcome to the Writers Tool!</h1>
-      <ProjectsIndex projects={projects} />
+      <ProjectsIndex projects={projects} onShowProject={handleShowProject} />
       <ProjectsNew onCreateProject={handleCreateProject} />
-      <Modal show={true}>
-        <h1>Test</h1>
+      <Modal show={isProjectShowVisible} onClose={handleClose}>
+        <ProjectsShow project={currentProject} />
       </Modal>
     </div>
   );
