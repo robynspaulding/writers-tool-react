@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { ProjectsIndex } from "./ProjectsIndex";
 import { ProjectsNew } from "./ProjectsNew";
+import { Modal } from "./Modal";
 
 export function Content() {
   const [projects, setProjects] = useState([]);
@@ -26,6 +27,9 @@ export function Content() {
       <h1>Welcome to the Writers Tool!</h1>
       <ProjectsIndex projects={projects} />
       <ProjectsNew onCreateProject={handleCreateProject} />
+      <Modal show={true}>
+        <h1>Test</h1>
+      </Modal>
     </div>
   );
 }
