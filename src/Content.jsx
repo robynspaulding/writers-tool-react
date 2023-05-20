@@ -14,12 +14,18 @@ export function Content() {
     });
   };
 
+  const handleCreateProject = (params) => {
+    console.log("Handle create project", params);
+    axios.post("http://localhost:3000/projects.json", params).then((response) => {
+      setProjects([...projects, response.data]);
+    });
+  };
   useEffect(handleIndexProjects, []);
   return (
     <div>
       <h1>Welcome to the Writers Tool!</h1>
       <ProjectsIndex projects={projects} />
-      <ProjectsNew />
+      <ProjectsNew onCreateProject={handleCreateProject} />
     </div>
   );
 }

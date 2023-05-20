@@ -1,8 +1,13 @@
-export function ProjectsNew() {
+export function ProjectsNew(props) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    props.onCreateProject(params, () => event.target.reset());
+  };
   return (
     <div>
       <h1>New Project</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           Working Title: <input name="working_title" type="text" />
         </div>
