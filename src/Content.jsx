@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { ProjectsIndex } from "./ProjectsIndex";
+import { ProjectsNew } from "./ProjectsNew";
 
 export function Content() {
   const [projects, setProjects] = useState([]);
@@ -18,6 +19,7 @@ export function Content() {
     <div>
       <h1>Welcome to the Writers Tool!</h1>
       <ProjectsIndex projects={projects} />
+      <ProjectsNew />
     </div>
   );
 }
