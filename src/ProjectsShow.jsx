@@ -1,11 +1,16 @@
 export function ProjectsShow(props) {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const params = new FormData(event.target);
+    props.onUpdateProject(props.project.id, params, () => event.target.reset());
+  };
   return (
     <div>
       <h1>Project Info</h1>
       <p>Working Title: {props.project.working_title}</p>
       <p>Status: {props.project.status}</p>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           Working Title: <input defaultValue={props.project.working_title} name="working_title" type="text" />
         </div>

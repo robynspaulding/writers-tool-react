@@ -36,6 +36,22 @@ export function Content() {
     setIsProjectShowVisible(false);
   };
 
+  const handleUpdateProject = (id, params) => {
+    console.log("handleUpdateProject", params);
+    axios.patch(`http://localhost:3000/projects/${id}.json`, params).then((response) => {
+      setProjects(
+        projects.map((project) => {
+          if (project.id === response.data.id) {
+            return response.data;
+          } else {
+            return project;
+          }
+        })
+      );
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexProjects, []);
   return (
     <div>
@@ -43,7 +59,7 @@ export function Content() {
       <ProjectsIndex projects={projects} onShowProject={handleShowProject} />
       <ProjectsNew onCreateProject={handleCreateProject} />
       <Modal show={isProjectShowVisible} onClose={handleClose}>
-        <ProjectsShow project={currentProject} />
+        <ProjectsShow project={currentProject} onUpdateProject={handleUpdateProject} />
       </Modal>
     </div>
   );
