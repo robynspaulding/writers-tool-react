@@ -52,6 +52,14 @@ export function Content() {
     });
   };
 
+  const handleDestroyProject = (project) => {
+    console.log("handleDestroyProject", project);
+    axios.delete(`http://localhost:3000/projects/${project.id}.json`).then((response) => {
+      setProjects(projects.filter((p) => p.id !== project.id));
+      handleClose();
+    });
+  };
+
   useEffect(handleIndexProjects, []);
   return (
     <div>
@@ -59,7 +67,11 @@ export function Content() {
       <ProjectsIndex projects={projects} onShowProject={handleShowProject} />
       <ProjectsNew onCreateProject={handleCreateProject} />
       <Modal show={isProjectShowVisible} onClose={handleClose}>
-        <ProjectsShow project={currentProject} onUpdateProject={handleUpdateProject} />
+        <ProjectsShow
+          project={currentProject}
+          onUpdateProject={handleUpdateProject}
+          onDestroyProject={handleDestroyProject}
+        />
       </Modal>
     </div>
   );
