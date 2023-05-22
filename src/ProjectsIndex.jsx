@@ -6,7 +6,7 @@ export function ProjectsIndex(props) {
         <div key={project.id}>
           <h2>Title: {project.working_title}</h2>
           <p>Status: {project.status}</p>
-          <button onClick={() => props.onShowProject(project)}>Edit Project Info</button>
+          <button onClick={() => props.onShowUpdateProject(project)}>Edit Project Info</button>
         </div>
       ))}
     </div>

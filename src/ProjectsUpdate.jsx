@@ -1,4 +1,4 @@
-export function ProjectsShow(props) {
+export function ProjectsUpdate(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const params = new FormData(event.target);

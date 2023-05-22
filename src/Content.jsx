@@ -4,11 +4,11 @@ import { useState } from "react";
 import { ProjectsIndex } from "./ProjectsIndex";
 import { ProjectsNew } from "./ProjectsNew";
 import { Modal } from "./Modal";
-import { ProjectsShow } from "./ProjectsShow";
+import { ProjectsUpdate } from "./ProjectsUpdate";
 
 export function Content() {
   const [projects, setProjects] = useState([]);
-  const [isProjectShowVisible, setIsProjectShowVisible] = useState(false);
+  const [isProjectShowUpdateVisible, setisProjectShowUpdateVisible] = useState(false);
   const [currentProject, setCurrentProject] = useState({});
 
   const handleIndexProjects = () => {
@@ -25,15 +25,15 @@ export function Content() {
     });
   };
 
-  const handleShowProject = (project) => {
-    console.log("handleShowProject", project);
-    setIsProjectShowVisible(true);
+  const handleShowUpdateProject = (project) => {
+    console.log("handleShowUpdateProject", project);
+    setisProjectShowUpdateVisible(true);
     setCurrentProject(project);
   };
 
   const handleClose = () => {
     console.log("handleClose");
-    setIsProjectShowVisible(false);
+    setisProjectShowUpdateVisible(false);
   };
 
   const handleUpdateProject = (id, params) => {
@@ -54,7 +54,7 @@ export function Content() {
 
   const handleDestroyProject = (project) => {
     console.log("handleDestroyProject", project);
-    axios.delete(`http://localhost:3000/projects/${project.id}.json`).then((response) => {
+    axios.delete(`http://localhost:3000/projects/${project.id}.json`).then(() => {
       setProjects(projects.filter((p) => p.id !== project.id));
       handleClose();
     });
@@ -64,10 +64,10 @@ export function Content() {
   return (
     <div>
       <h1>Welcome to the Writers Tool!</h1>
-      <ProjectsIndex projects={projects} onShowProject={handleShowProject} />
+      <ProjectsIndex projects={projects} onShowUpdateProject={handleShowUpdateProject} />
       <ProjectsNew onCreateProject={handleCreateProject} />
-      <Modal show={isProjectShowVisible} onClose={handleClose}>
-        <ProjectsShow
+      <Modal show={isProjectShowUpdateVisible} onClose={handleClose}>
+        <ProjectsUpdate
           project={currentProject}
           onUpdateProject={handleUpdateProject}
           onDestroyProject={handleDestroyProject}
